@@ -1,5 +1,97 @@
-<h2>Dashboard</h2>
+{% extends "base.html" %}
 
-<p>Welcome {{ request.user.username }}</p>
+{% block content %}
+<div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+    
+    <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-6">
+        <div>
+            <h2 class="text-4xl font-extrabold text-white tracking-tight">
+                Welcome back, <span class="text-cyan-400">{{ request.user.username }}</span>!
+            </h2>
+            <p class="text-slate-400 mt-1 flex items-center">
+                System active — you have {{ messages_count|default:"0" }} new inquiries.
+            </p>
+        </div>
 
-<a href="{% url 'logout' %}">Logout</a>
+        <div class="flex items-center gap-3">
+            <!-- ✅ FIXED HERE -->
+            <a href="{% url 'create_project' %}" class="group bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold px-6 py-3 rounded-2xl transition-all flex items-center shadow-lg shadow-cyan-500/20 active:scale-95">
+                Add Project
+            </a>
+
+            <form action="{% url 'logout' %}" method="post" class="inline">
+                {% csrf_token %}
+                <button type="submit" class="bg-slate-800 hover:bg-red-500/10 hover:text-red-400 text-slate-300 border border-slate-700 px-6 py-3 rounded-2xl transition-all font-medium">
+                    Logout
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+        <div class="bg-slate-800/40 border border-slate-700/50 p-6 rounded-3xl backdrop-blur-sm">
+            <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Total Projects</p>
+            <h3 class="text-4xl font-black text-white mt-2">{{ projects.count|default:"0" }}</h3>
+        </div>
+
+        <div class="bg-slate-800/40 border border-slate-700/50 p-6 rounded-3xl backdrop-blur-sm">
+            <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Inbox</p>
+            <h3 class="text-4xl font-black text-cyan-400 mt-2">{{ messages_count|default:"0" }}</h3>
+        </div>
+
+        <div class="bg-slate-800/40 border border-slate-700/50 p-6 rounded-3xl backdrop-blur-sm">
+            <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Reach</p>
+            <h3 class="text-4xl font-black text-white mt-2">1.2k</h3>
+        </div>
+    </div>
+
+    <div class="bg-slate-800/20 border border-slate-700 rounded-3xl overflow-hidden shadow-sm">
+        <div class="p-6 border-b border-slate-700/50 flex justify-between items-center bg-slate-800/30">
+            <h3 class="font-bold text-xl text-white">Recent Work</h3>
+
+            <!-- ✅ CORRECT NAME -->
+            <a href="{% url 'project_list' %}" class="text-cyan-400 text-sm font-semibold hover:text-cyan-300 transition-colors">
+                View Library →
+            </a>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead class="text-slate-500 text-xs uppercase">
+                    <tr>
+                        <th class="px-6 py-4 font-bold">Project Name</th>
+                        <th class="px-6 py-4 font-bold">Tech Stack</th>
+                        <th class="px-6 py-4 font-bold text-right">Management</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-slate-700/30">
+                    {% for project in projects|slice:":5" %}
+                    <tr class="hover:bg-slate-700/20 transition-all">
+                        <td class="px-6 py-4 text-slate-200 font-semibold">
+                            {{ project.title }}
+                        </td>
+
+                        <td class="px-6 py-4 text-slate-400">
+                            {{ project.tech_stack|truncatechars:20 }}
+                        </td>
+
+                        <td class="px-6 py-4 text-right">
+                            <a href="{% url 'edit_project' project.pk %}" class="text-yellow-400 mr-3">Edit</a>
+                            <a href="{% url 'delete_project' project.pk %}" class="text-red-400">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" class="px-6 py-12 text-center text-slate-500 italic">
+                            No projects found.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

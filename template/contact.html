@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex flex-col items-center justify-center py-10">
+    <div class="w-full max-w-xl">
+        <h2 class="text-4xl font-extrabold text-cyan-400 mb-2">Get In Touch</h2>
+        <p class="text-slate-400 mb-8">Have a project in mind? Let's build something amazing together.</p>
+
+        <form method="POST" class="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700 shadow-xl space-y-6">
+            {% csrf_token %}
+
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-slate-300">Your Name</label>
+                <div class="django-input-wrapper">
+                    {{ form.name }}
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-slate-300">Email Address</label>
+                <div class="django-input-wrapper">
+                    {{ form.email }}
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-slate-300">Message</label>
+                <div class="django-input-wrapper">
+                    {{ form.message }}
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold py-3 px-6 rounded-xl transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg shadow-cyan-500/20">
+                Send Message
+            </button>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* This targets the raw input tags Django generates */
+    .django-input-wrapper input, 
+    .django-input-wrapper textarea {
+        width: 100%;
+        background-color: #0f172a; /* slate-900 */
+        border: 1px solid #334155; /* slate-700 */
+        border-radius: 0.75rem;
+        padding: 0.75rem 1rem;
+        color: #f1f5f9;
+        outline: none;
+        transition: all 0.2s;
+    }
+
+    .django-input-wrapper input:focus, 
+    .django-input-wrapper textarea:focus {
+        border-color: #22d3ee; /* cyan-400 */
+        box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.2);
+    }
+
+    /* Fixed height for message area */
+    .django-input-wrapper textarea {
+        min-height: 120px;
+    }
+</style>
+{% endblock %}
