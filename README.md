@@ -1,4 +1,9 @@
 # Django_Portfolio
 
-id - portfolio
-pass - portfolio@123
+
+# for superuser
+<!-- Username: mannat_admin
+Password: Mannat@2026Secure -->
+
+
+# for login (if required)
