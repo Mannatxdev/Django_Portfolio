@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'contact_app',
     'api_app',
     'rest_framework.authtoken',
+    'core',
 ]
 
 MIDDLEWARE = [
