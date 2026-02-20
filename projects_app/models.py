@@ -8,6 +8,7 @@ class Project(models.Model):
     tech_stack = models.CharField(max_length=300)
     github_link = models.URLField(blank=True, null=True)
     live_demo_link = models.URLField(blank=True, null=True)
+    image = models.ImageField(upload_to='projects/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

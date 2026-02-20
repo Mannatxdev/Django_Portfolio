@@ -7,10 +7,13 @@
         <p class="text-slate-400">Showcase your latest work to the world.</p>
     </div>
 
-    <form method="POST" class="bg-slate-800/40 backdrop-blur-md p-8 rounded-2xl border border-slate-700 shadow-2xl space-y-8">
+    <!-- IMPORTANT: enctype added -->
+    <form method="POST" enctype="multipart/form-data"
+          class="bg-slate-800/40 backdrop-blur-md p-8 rounded-2xl border border-slate-700 shadow-2xl space-y-8">
         {% csrf_token %}
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
             <div class="space-y-2">
                 <label class="text-sm font-semibold text-cyan-300 tracking-wide uppercase">Project Title</label>
                 <div class="form-field-wrapper">
@@ -21,7 +24,7 @@
             <div class="space-y-2">
                 <label class="text-sm font-semibold text-cyan-300 tracking-wide uppercase">Technologies</label>
                 <div class="form-field-wrapper">
-                    {{ form.technologies }}
+                    {{ form.tech_stack }}
                 </div>
             </div>
 
@@ -33,18 +36,27 @@
             </div>
 
             <div class="space-y-2">
-                <label class="text-sm font-semibold text-cyan-300 tracking-wide uppercase">Project Link</label>
+                <label class="text-sm font-semibold text-cyan-300 tracking-wide uppercase">Live Project Link</label>
                 <div class="form-field-wrapper">
-                    {{ form.link }}
+                    {{ form.live_demo_link }}
                 </div>
             </div>
             
             <div class="space-y-2">
                 <label class="text-sm font-semibold text-cyan-300 tracking-wide uppercase">Github Repo</label>
                 <div class="form-field-wrapper">
-                    {{ form.github_url }}
+                    {{ form.github_link }}
                 </div>
             </div>
+
+            <!-- ✅ NEW IMAGE FIELD -->
+            <div class="md:col-span-2 space-y-2">
+                <label class="text-sm font-semibold text-cyan-300 tracking-wide uppercase">Project Image</label>
+                <div class="form-field-wrapper">
+                    {{ form.image }}
+                </div>
+            </div>
+
         </div>
 
         <div class="flex items-center justify-end space-x-4 pt-4">
@@ -57,28 +69,28 @@
 </div>
 
 <style>
-    .form-field-wrapper input, 
-    .form-field-wrapper textarea,
-    .form-field-wrapper select {
-        width: 100%;
-        background: #0f172a !important; /* Matches slate-900 */
-        border: 1px solid #334155 !important; /* Matches slate-700 */
-        border-radius: 0.75rem;
-        padding: 0.75rem 1rem;
-        color: #f1f5f9;
-        outline: none;
-        transition: all 0.3s ease;
-    }
+.form-field-wrapper input, 
+.form-field-wrapper textarea,
+.form-field-wrapper select {
+    width: 100%;
+    background: #0f172a !important;
+    border: 1px solid #334155 !important;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: #f1f5f9;
+    outline: none;
+    transition: all 0.3s ease;
+}
 
-    .form-field-wrapper input:focus, 
-    .form-field-wrapper textarea:focus {
-        border-color: #22d3ee !important; /* Cyan glow */
-        box-shadow: 0 0 15px rgba(34, 211, 238, 0.1);
-    }
+.form-field-wrapper input:focus, 
+.form-field-wrapper textarea:focus {
+    border-color: #22d3ee !important;
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.1);
+}
 
-    /* Target specific height for descriptions */
-    .form-field-wrapper textarea {
-        min-height: 150px;
-    }
+.form-field-wrapper textarea {
+    min-height: 150px;
+}
 </style>
+
 {% endblock %}
