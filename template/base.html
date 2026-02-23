@@ -16,12 +16,13 @@
             </h1>
 
             <div class="hidden md:flex items-center space-x-8 font-medium">
-                <a href="/" class="transition-colors hover:text-cyan-400">Home</a>
-                <a href="/projects/" class="transition-colors hover:text-cyan-400">Projects</a>
+                <a href="/" class="transition-colors hover:text-cyan-400">HOME</a>
+                <a href="/projects/" class="transition-colors hover:text-cyan-400">PROJECTS</a>
                 <a href="{% url 'coding_stats' %}" class="transition-colors hover:text-cyan-400">
-                Coding Stats
+                CODING STATS
                 </a>
-                <a href="/contact/" class="transition-colors hover:text-cyan-400">Contact</a>
+                <a href="/contact/" class="transition-colors hover:text-cyan-400">CONTACT</a>
+                <a href="/resume/" class="transition-colors hover:text-cyan-400">RESUME</a>
 
                 <!-- {% if user.is_authenticated %}
                     <a href="/accounts/dashboard/" class="transition-colors hover:text-cyan-400">Dashboard</a>
@@ -75,6 +76,13 @@
            class="hover:text-white transition-colors">
             GitHub
         </a>
+
+        <a href="http://127.0.0.1:8000/admin/core/codingstat/"
+           target="_blank"
+           class="hover:text-white transition-colors">
+            Admin
+        </a>
+
 
     </div>
 

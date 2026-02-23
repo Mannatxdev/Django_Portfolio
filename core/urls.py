@@ -25,10 +25,12 @@ urlpatterns = [
     path('accounts/', include('accounts_app.urls')),
     path('projects/', include('projects_app.urls')),
     path('contact/', include('contact_app.urls')),
-    path('api/', include('api_app.urls')),
+    # path('api/', include('api_app.urls')),
 ]
 from django.conf import settings
 from django.conf.urls.static import static
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+    
