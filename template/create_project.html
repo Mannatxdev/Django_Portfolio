@@ -7,7 +7,6 @@
         <p class="text-slate-400">Showcase your latest work to the world.</p>
     </div>
 
-    <!-- IMPORTANT: enctype added -->
     <form method="POST" enctype="multipart/form-data"
           class="bg-slate-800/40 backdrop-blur-md p-8 rounded-2xl border border-slate-700 shadow-2xl space-y-8">
         {% csrf_token %}
@@ -49,7 +48,6 @@
                 </div>
             </div>
 
-            <!-- ✅ NEW IMAGE FIELD -->
             <div class="md:col-span-2 space-y-2">
                 <label class="text-sm font-semibold text-cyan-300 tracking-wide uppercase">Project Image</label>
                 <div class="form-field-wrapper">
